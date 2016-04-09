@@ -1,42 +1,6 @@
-## Put comments here that give an overall description of what your
-## functions do
-
-## makeVector creates a special vector which is really a list, to
-##  set/get the value of the vector and set/get the value of the mean
-##  (cut and pasted from https://github.com/rdpeng/ProgrammingAssignment2)
-
-makeVector <- function(x = numeric()) {
-  m <- NULL
-  set <- function(y) {
-    x <<- y
-    m <<- NULL
-  }
-  get <- function() x
-  setmean <- function(mean) m <<- mean
-  getmean <- function() m
-  list(set = set, get = get,
-       setmean = setmean,
-       getmean = getmean)
-}
-
-## cachemean calculates the mean of the special "vector" created by makeVector.
-## However, it first checks to see if the mean has already been calculated.
-## If so, it gets the mean from the cache and skips the computation.
-## Otherwise, it calculates the mean of the data and sets the value of the
-## mean in the cache via the setmean function.
-##  (cut and pasted from https://github.com/rdpeng/ProgrammingAssignment2)
-
-cachemean <- function(x, ...) {
-  m <- x$getmean()
-  if(!is.null(m)) {
-    message("getting cached data")
-    return(m)
-  }
-  data <- x$get()
-  m <- mean(data, ...)
-  x$setmean(m)
-  m
-}
+## These functions create a caching environment whereby a matrix's
+##  inverse can be kept for posterity to avoid recalculating if it's
+## already been done once.
 
 ## makeCacheMatrix creates a special matrix which is really a list, to
 ##  set/get the value of the matrix and set/get the value of its inverse
